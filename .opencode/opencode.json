@@ -7,6 +7,7 @@
       "git status*": "allow",
       "git diff*": "allow",
       "git log*": "allow",
+      "git remote*": "allow",
       "grep *": "allow",
       "make test*": "allow",
       "make lint*": "allow",
@@ -16,6 +17,10 @@
       "make run*": "allow",
       "make dev*": "allow",
       "make setup*": "allow",
+      "make sast*": "allow",
+      "make sca*": "allow",
+      "make secrets*": "allow",
+      "make audit*": "allow",
       "make help*": "allow"
     },
     "webfetch": "ask",
@@ -45,9 +50,10 @@
           "git status*": "allow",
           "git diff*": "allow",
           "git log*": "allow",
+          "git remote*": "allow",
           "grep *": "allow",
           "bash init.sh": "allow",
-          "make help": "allow"
+          "make help*": "allow"
         },
         "task": {
           "*": "deny",
@@ -84,6 +90,7 @@
           "git log*": "allow",
           "git add*": "allow",
           "git commit*": "allow",
+          "git remote*": "allow",
           "grep *": "allow",
           "make test*": "allow",
           "make lint*": "allow",
@@ -93,6 +100,10 @@
           "make run*": "allow",
           "make dev*": "allow",
           "make setup*": "allow",
+          "make sast*": "allow",
+          "make sca*": "allow",
+          "make secrets*": "allow",
+          "make audit*": "allow",
           "make help*": "allow",
           "git push*": "ask",
           "git reset*": "ask",
@@ -110,7 +121,8 @@
         "skill": {
           "git-commit": "allow",
           "git-push": "allow",
-          "prepare-pr": "allow"
+          "prepare-pr": "allow",
+          "setup-cicd": "allow"
         }
       }
     },
@@ -141,6 +153,10 @@
           "make typecheck*": "allow",
           "make build*": "allow",
           "make check*": "allow",
+          "make sast*": "allow",
+          "make sca*": "allow",
+          "make secrets*": "allow",
+          "make audit*": "allow",
           "make help*": "allow"
         },
         "task": {

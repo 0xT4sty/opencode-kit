@@ -93,6 +93,10 @@ agentes tienen prohibido llamar al build tool nativo directamente (`./gradlew`, 
 lenguaje: `/adoptar` y `/nuevo` rellenan el `Makefile` por ti. Detalle en
 `.opencode/README.md`.
 
+La misma fachada llega a CI: **`/cicd`** genera el pipeline (GitHub Actions o GitLab CI)
+que ejecuta `make check`/`make build`, añade seguridad (SAST/SCA/secretos) y un deploy
+con aprobación humana. CI y local verifican lo mismo.
+
 ## Para el equipo: convenciones
 
 - El `AGENTS.md` es la fuente de verdad compartida. Si cambias una regla, commitéala:

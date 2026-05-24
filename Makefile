@@ -14,7 +14,7 @@
 # real. Un target que no aplica a tu lenguaje es un no-op silencioso (`@:`), NO se
 # borra — así `make check` / /verifica nunca rompen por un target ausente.
 
-.PHONY: setup dev run test lint typecheck build check help
+.PHONY: setup dev run test lint typecheck build check sast sca secrets audit deploy help
 
 help: ## Lista los targets disponibles
 	@grep -E '^[a-zA-Z0-9_.-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -42,3 +42,19 @@ build: ## Build de producción
 	@echo "TODO(build): ./gradlew build | npm run build | cargo build --release"
 
 check: test lint typecheck ## Verificación completa en un comando (test + lint + typecheck)
+
+# --- Seguridad (los mismos comandos corren en local y en CI) -----------------
+sast: ## Análisis estático de seguridad (SAST)
+	@echo "TODO(sast): semgrep ci  — o '@:' (no-op) si solo corre en CI"
+
+sca: ## Análisis de dependencias / vulnerabilidades (SCA)
+	@echo "TODO(sca): trivy fs --scanners vuln .  — o npm audit / pip-audit / cargo audit"
+
+secrets: ## Escaneo de secretos en el repo
+	@echo "TODO(secrets): gitleaks detect --no-banner"
+
+audit: sca sast secrets ## Agregado de seguridad (sca + sast + secrets)
+
+# deploy NO está pre-autorizado en opencode.json a propósito: cae en 'ask'.
+deploy: ## Despliegue (acción sensible: pide confirmación)
+	@echo "TODO(deploy): define tu despliegue (gated en CI con aprobación humana)"

@@ -29,6 +29,8 @@ que esperas, **arréglalo en el Makefile**, no lo esquives con un comando nativo
 | Type check  | `make typecheck` | OBLIGATORIO (no-op si no aplica)    |
 | Build       | `make build`     | Antes de validar entregable         |
 | Verificar   | `make check`     | test+lint+typecheck en un comando   |
+| Seguridad   | `make audit`     | SCA + SAST + secretos (mismos en CI)|
+| Deploy      | `make deploy`    | GATED: pide confirmación (no auto)  |
 
 ## Roles de agente (nativos OpenCode)
 Definidos en `.opencode/opencode.json`, con permisos REALES (no son sugerencias):

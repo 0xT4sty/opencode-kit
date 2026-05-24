@@ -114,6 +114,7 @@ el agente y el modelo adecuados, así que no cambias de rol a mano.
 | `/tarea <desc>` | Descompone la tarea en plan revisable (Spec Driven).  | orchestrator |
 | `/verifica`     | Corre test/lint/typecheck e interpreta fallos.        | reviewer |
 | `/revisa`       | Revisa el diff actual con el checklist del reviewer.  | reviewer |
+| `/cicd`         | Prepara CI/CD (GitHub/GitLab): verify+build+seguridad.| orchestrator |
 | `/cierre`       | Actualiza HANDOFF.md y FEATURES.md antes de terminar. | orchestrator |
 
 Ritual típico de sesión: `/arranque` → `/tarea "lo que sea"` → (apruebas el plan) →
@@ -146,6 +147,14 @@ Un comando nativo no está pre-autorizado y dispara confirmación a cada paso. S
 no hace lo que toca, se arregla el `Makefile`, no se esquiva. Lo destructivo (`git push`,
 `rm`, `git reset`, `make migrate`) sigue en `ask`: la automatización cubre el build, no lo
 irreversible. El developer corre `make check` en un solo comando en vez de tres.
+
+**CI/CD extiende la misma fachada.** `/cicd` genera el pipeline (GitHub Actions o GitLab
+CI) que llama a `make check` / `make build` — así CI y local verifican lo idéntico. Añade
+seguridad (SAST/SCA/secretos vía `make sast`/`make sca`/`make secrets`, pre-autorizados) y
+un stage de deploy **con aprobación humana** (`make deploy` queda fuera del allowlist a
+propósito). El conocimiento (plantillas, tools, reglas de seguridad) vive en la skill
+`setup-cicd`; el repo remoto, los secretos y la branch protection los configuras tú en el
+proveedor — el harness no toca lo remoto.
 
 ## Por qué OpenCode y no formato portable
 
