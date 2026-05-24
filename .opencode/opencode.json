@@ -1,0 +1,155 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "edit": "ask",
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "grep *": "allow",
+      "make test*": "allow",
+      "make lint*": "allow",
+      "make typecheck*": "allow",
+      "make build*": "allow",
+      "make check*": "allow",
+      "make run*": "allow",
+      "make dev*": "allow",
+      "make setup*": "allow",
+      "make help*": "allow"
+    },
+    "webfetch": "ask",
+    "skill": {
+      "*": "allow"
+    }
+  },
+  "agent": {
+    "orchestrator": {
+      "description": "Coordina el trabajo: descompone, enruta a developer/reviewer y mantiene la memoria del proyecto. NUNCA implementa código.",
+      "mode": "primary",
+      "model": "opencode-go/glm-5.1",
+      "temperature": 0.2,
+      "prompt": "{file:./prompts/orchestrator.md}",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": true,
+        "read": true,
+        "grep": true,
+        "glob": true
+      },
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "*": "ask",
+          "git status*": "allow",
+          "git diff*": "allow",
+          "git log*": "allow",
+          "grep *": "allow",
+          "bash init.sh": "allow",
+          "make help": "allow"
+        },
+        "task": {
+          "*": "deny",
+          "developer": "allow",
+          "reviewer": "allow"
+        },
+        "skill": {
+          "git-commit": "deny",
+          "git-push": "deny",
+          "prepare-pr": "deny"
+        }
+      }
+    },
+    "developer": {
+      "description": "Implementa UNA tarea atómica dentro del scope que le da el orquestador. Lee antes de escribir. Verifica antes de entregar.",
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.1,
+      "prompt": "{file:./prompts/developer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "read": true,
+        "grep": true,
+        "glob": true
+      },
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "*": "ask",
+          "git status*": "allow",
+          "git diff*": "allow",
+          "git log*": "allow",
+          "git add*": "allow",
+          "git commit*": "allow",
+          "grep *": "allow",
+          "make test*": "allow",
+          "make lint*": "allow",
+          "make typecheck*": "allow",
+          "make build*": "allow",
+          "make check*": "allow",
+          "make run*": "allow",
+          "make dev*": "allow",
+          "make setup*": "allow",
+          "make help*": "allow",
+          "git push*": "ask",
+          "git reset*": "ask",
+          "rm *": "ask",
+          "make migrate*": "ask",
+          "git init": "allow",
+          "git init*": "allow",
+          "git checkout -b*": "allow",
+          "git branch*": "allow",
+          "mkdir *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        },
+        "skill": {
+          "git-commit": "allow",
+          "git-push": "allow",
+          "prepare-pr": "allow"
+        }
+      }
+    },
+    "reviewer": {
+      "description": "Revisa el trabajo del developer en SOLO LECTURA. Ejecuta su propia verificación. Señala, no arregla.",
+      "mode": "subagent",
+      "model": "opencode-go/qwen3.6-plus",
+      "temperature": 0.1,
+      "prompt": "{file:./prompts/reviewer.md}",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": true,
+        "read": true,
+        "grep": true,
+        "glob": true
+      },
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "*": "deny",
+          "git status*": "allow",
+          "git diff*": "allow",
+          "git log*": "allow",
+          "grep *": "allow",
+          "make test*": "allow",
+          "make lint*": "allow",
+          "make typecheck*": "allow",
+          "make build*": "allow",
+          "make check*": "allow",
+          "make help*": "allow"
+        },
+        "task": {
+          "*": "deny"
+        },
+        "skill": {
+          "*": "deny"
+        }
+      }
+    }
+  }
+}

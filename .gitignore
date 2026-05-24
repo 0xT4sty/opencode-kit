@@ -1,0 +1,41 @@
+# Secretos — NUNCA se commitean (ver regla en AGENTS.md)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.*
+
+# Copias de seguridad que crea install.sh al adoptar el kit
+*.bak
+
+# Artefactos de build (genéricos a varios lenguajes)
+dist/
+build/
+out/
+target/
+bin/
+*.egg-info/
+.next/
+
+# Dependencias
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Caches de herramientas
+.gradle/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.cache/
+
+# Estado local de herramientas (no compartido)
+.claude/
+
+# Entorno de editores / SO
+.DS_Store
+.idea/
+*.swp
