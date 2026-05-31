@@ -9,7 +9,7 @@ que yo confirme antes de que se escriba nada.
 ## Fase 1 — Explorar (solo lectura, hazlo tú)
 
 Estructura y archivos clave:
-!`bash init.sh 2>/dev/null || true`
+!`bash .opencode/init.sh 2>/dev/null || true`
 
 Lenguajes y manifiestos presentes:
 !`ls -la; echo "---"; for f in package.json pyproject.toml requirements.txt Cargo.toml go.mod Gemfile pom.xml build.gradle build.gradle.kts composer.json; do [ -f "$f" ] && echo "ENCONTRADO: $f"; done`

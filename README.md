@@ -34,10 +34,14 @@ El script copia `.opencode/` y los archivos de raíz **sin pisar** lo que ya ten
 ## Qué se versiona (y qué no)
 
 Commitea al repo (compartido con el equipo):
-- `.opencode/` entero (agentes, skills, comandos, prompts)
-- `AGENTS.md`, `Makefile`, `init.sh`, `.gitignore`
-- `FEATURES.md`, `HANDOFF.md` (estado vivo del proyecto)
+- `.opencode/` entero (agentes, skills, comandos, prompts, `init.sh` y la memoria
+  viva en `.opencode/memory/`: `FEATURES.md` y `HANDOFF.md`)
+- `AGENTS.md`, `Makefile`, `.gitignore`
 - `docs/decisions/`
+
+> En la raíz solo viven `AGENTS.md` (lo auto-carga OpenCode) y `Makefile` (se ejecuta
+> desde la raíz). Todo lo demás del harness vive bajo `.opencode/` para no ensuciar
+> el repo donde trabajas.
 
 No commitees (añádelo a `.gitignore` si aplica): nada del harness en sí. Las
 preferencias personales van en el **global de cada uno** (ver siguiente sección).

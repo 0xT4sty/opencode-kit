@@ -52,7 +52,7 @@
           "git log*": "allow",
           "git remote*": "allow",
           "grep *": "allow",
-          "bash init.sh": "allow",
+          "bash .opencode/init.sh": "allow",
           "make help*": "allow"
         },
         "task": {

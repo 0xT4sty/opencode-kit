@@ -57,8 +57,10 @@ while IFS= read -r -d '' f; do
 done < <(find "$SRC/.opencode" -type f -print0)
 
 echo ""
-echo "==> Copiando archivos de raíz (memoria, build, orientación)"
-for f in AGENTS.md Makefile init.sh FEATURES.md HANDOFF.md; do
+echo "==> Copiando archivos de raíz (reglas y fachada de build)"
+# Solo AGENTS.md (lo auto-carga OpenCode) y Makefile (se ejecuta desde raíz) viven
+# en la raíz. El resto del harness (init.sh, memoria) ya viajó dentro de .opencode/.
+for f in AGENTS.md Makefile; do
   [ -f "$SRC/$f" ] && copy_safe "$SRC/$f" "$DEST/$f"
 done
 copy_safe "$SRC/docs/decisions/ADR-template.md" "$DEST/docs/decisions/ADR-template.md"
@@ -80,7 +82,7 @@ if [ -f "$SRC/.gitignore" ]; then
 fi
 
 # init.sh ejecutable
-[ -f "$DEST/init.sh" ] && chmod +x "$DEST/init.sh"
+[ -f "$DEST/.opencode/init.sh" ] && chmod +x "$DEST/.opencode/init.sh"
 
 echo ""
 echo "==> Hecho. Próximos pasos:"

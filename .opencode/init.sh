@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # init.sh — orientación rápida del repo para un agente que acaba de llegar.
-# Pídele al orquestador que ejecute `bash init.sh` al empezar la sesión.
+# Pídele al orquestador que ejecute `bash .opencode/init.sh` al empezar la sesión.
 # Solo lee e imprime; no modifica nada.
 
 set -euo pipefail
@@ -38,7 +38,7 @@ echo -e "\n## Agentes OpenCode configurados"
 [ -f .opencode/opencode.json ] && grep -E '"(orchestrator|developer|reviewer)"' .opencode/opencode.json | sed 's/[":{]//g;s/^ */  - /' || echo "  (sin opencode.json)"
 
 echo -e "\n## Archivos de contexto"
-for f in AGENTS.md FEATURES.md HANDOFF.md; do
+for f in AGENTS.md .opencode/memory/FEATURES.md .opencode/memory/HANDOFF.md; do
   [ -f "$f" ] && echo "  ✓ $f" || echo "  ✗ $f (falta)"
 done
 
@@ -46,4 +46,4 @@ echo -e "\n## Decisiones de arquitectura"
 [ -d docs/decisions ] && ls -1 docs/decisions/ 2>/dev/null | sed 's/^/  /' || echo "  (ninguna)"
 
 echo -e "\n=================================================="
-echo "Lee AGENTS.md, HANDOFF.md y FEATURES.md antes de empezar."
+echo "Lee AGENTS.md, .opencode/memory/HANDOFF.md y .opencode/memory/FEATURES.md antes de empezar."

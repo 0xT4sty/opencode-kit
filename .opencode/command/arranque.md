@@ -5,13 +5,13 @@ agent: orchestrator
 Estás arrancando una sesión de trabajo. Oriéntate antes de hacer nada.
 
 Contexto del repositorio:
-!`bash init.sh`
+!`bash .opencode/init.sh`
 
 Estado de las features:
-@FEATURES.md
+@.opencode/memory/FEATURES.md
 
 Traspaso de la última sesión:
-@HANDOFF.md
+@.opencode/memory/HANDOFF.md
 
 Reglas del proyecto:
 @AGENTS.md

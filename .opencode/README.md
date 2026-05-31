@@ -8,19 +8,25 @@ y modelos configurables por proveedor (Anthropic / Google / OpenAI / Zen).
 ```
 tu-repo/
 ├── AGENTS.md                      ← reglas del proyecto (OpenCode las lee solas)
-├── FEATURES.md                    ← memoria larga: estado de features
-├── HANDOFF.md                     ← traspaso entre sesiones
 ├── Makefile                       ← targets test/lint/typecheck/build
-├── init.sh                        ← orientación al empezar sesión
 ├── docs/decisions/                ← ADRs (decisiones de arquitectura)
-└── .opencode/
+└── .opencode/                     ← todo el harness vive aquí (no ensucia la raíz)
     ├── opencode.json              ← agentes + permisos REALES + modelos
     ├── README.md                  ← este archivo
+    ├── init.sh                    ← orientación al empezar sesión
+    ├── memory/
+    │   ├── FEATURES.md            ← memoria larga: estado de features
+    │   └── HANDOFF.md             ← traspaso entre sesiones
+    ├── command/                   ← comandos slash (/arranque, /tarea, ...)
+    ├── skills/                    ← skills de git/CI invocables
     └── prompts/
         ├── orchestrator.md        ← rol primario (no implementa)
         ├── developer.md           ← subagente que implementa
         └── reviewer.md            ← subagente solo-lectura
 ```
+
+> Solo `AGENTS.md` y `Makefile` quedan en la raíz; el resto del harness se agrupa
+> bajo `.opencode/` para que el repo donde trabajas quede limpio.
 
 ## Antes de usar: 3 cosas obligatorias
 
@@ -88,7 +94,7 @@ escribe — la separación de permisos se mantiene.
 ## El ciclo de trabajo
 
 ```
-Tú ──▶ @orchestrator ─┬─ ejecuta init.sh, lee AGENTS/HANDOFF/FEATURES
+Tú ──▶ @orchestrator ─┬─ ejecuta .opencode/init.sh, lee AGENTS/HANDOFF/FEATURES
                       ├─ descompone en tareas atómicas
                       ├─ te presenta el PLAN ──▶ tú apruebas (checkpoint)
                       │
@@ -110,12 +116,12 @@ el agente y el modelo adecuados, así que no cambias de rol a mano.
 | --------------- | ----------------------------------------------------- | ------ |
 | `/adoptar`      | Enchufa el kit a un repo existente: explora y rellena.| orchestrator |
 | `/nuevo <idea>` | Arranca un proyecto de cero: andamia + primer commit. | orchestrator |
-| `/arranque`     | Ejecuta init.sh, lee AGENTS/HANDOFF/FEATURES, resume. | orchestrator |
+| `/arranque`     | Ejecuta .opencode/init.sh, lee AGENTS/HANDOFF/FEATURES, resume. | orchestrator |
 | `/tarea <desc>` | Descompone la tarea en plan revisable (Spec Driven).  | orchestrator |
 | `/verifica`     | Corre test/lint/typecheck e interpreta fallos.        | reviewer |
 | `/revisa`       | Revisa el diff actual con el checklist del reviewer.  | reviewer |
 | `/cicd`         | Prepara CI/CD (GitHub/GitLab): verify+build+seguridad.| orchestrator |
-| `/cierre`       | Actualiza HANDOFF.md y FEATURES.md antes de terminar. | orchestrator |
+| `/cierre`       | Actualiza la memoria en `.opencode/memory/` antes de terminar. | orchestrator |
 
 Ritual típico de sesión: `/arranque` → `/tarea "lo que sea"` → (apruebas el plan) →
 el developer implementa → `/revisa` → `/cierre`.

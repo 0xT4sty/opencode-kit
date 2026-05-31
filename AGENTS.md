@@ -11,7 +11,7 @@ TODO: describe el proyecto en 2-3 frases (qué hace, para quién, estado).
 - **Backend:** Python <X.Y> (<FastAPI / Django / ...>)
 - **Frontend:** TypeScript + <React / Next / ...>
 - **Orquestación:** Make (ver comandos)
-- **Tests:** <pytest / vitest>  — cobertura PARCIAL, ver `FEATURES.md`
+- **Tests:** <pytest / vitest>  — cobertura PARCIAL, ver `.opencode/memory/FEATURES.md`
 
 ## Comandos (úsalos SIEMPRE vía make, no invoques el build tool nativo)
 `make` es la fachada del proyecto y está **pre-autorizada** (no pide permiso). Llamar
@@ -63,10 +63,10 @@ o el orquestador los llama solo. Detalle en `.opencode/README.md`.
 - Nomenclatura e imports: copia el patrón del módulo vecino.
 
 ## Memoria entre sesiones
-- Estado de features → `FEATURES.md`
-- Traspaso de sesión → `HANDOFF.md`
+- Estado de features → `.opencode/memory/FEATURES.md`
+- Traspaso de sesión → `.opencode/memory/HANDOFF.md`
 - Decisiones de arquitectura → `docs/decisions/`
-Al empezar: lee `HANDOFF.md` y `FEATURES.md`. Al terminar: actualiza ambos.
+Al empezar: lee `.opencode/memory/HANDOFF.md` y `.opencode/memory/FEATURES.md`. Al terminar: actualiza ambos.
 
 ## Qué NO tocar nunca
 - TODO: rutas intocables (ej: `**/migrations/*_applied.py`, `dist/`, `*.lock`).

@@ -34,7 +34,8 @@ Diseña y preséntame:
    los prompts.
 4. Los archivos base imprescindibles (manifiesto del lenguaje, .gitignore, README mínimo,
    un "hola mundo" o esqueleto que arranque y se pueda verificar).
-5. El resto de archivos de memoria del harness (FEATURES.md, HANDOFF.md) inicializados.
+5. El resto de archivos de memoria del harness (`.opencode/memory/FEATURES.md`,
+   `.opencode/memory/HANDOFF.md`) inicializados.
 
 Justifica brevemente por qué ese alcance es el mínimo viable. Espera mi OK.
 
