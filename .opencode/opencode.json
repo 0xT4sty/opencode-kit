@@ -32,6 +32,7 @@
     "orchestrator": {
       "description": "Coordina el trabajo: descompone, enruta a developer/reviewer y mantiene la memoria del proyecto. NUNCA implementa código.",
       "mode": "primary",
+      "color": "#a78bfa",
       "model": "opencode-go/glm-5.1",
       "temperature": 0.2,
       "prompt": "{file:./prompts/orchestrator.md}",
@@ -70,6 +71,7 @@
     "developer": {
       "description": "Implementa UNA tarea atómica dentro del scope que le da el orquestador. Lee antes de escribir. Verifica antes de entregar.",
       "mode": "subagent",
+      "color": "#4ade80",
       "model": "opencode-go/deepseek-v4-flash",
       "temperature": 0.1,
       "prompt": "{file:./prompts/developer.md}",
@@ -129,6 +131,7 @@
     "reviewer": {
       "description": "Revisa el trabajo del developer en SOLO LECTURA. Ejecuta su propia verificación. Señala, no arregla.",
       "mode": "subagent",
+      "color": "#fbbf24",
       "model": "opencode-go/qwen3.6-plus",
       "temperature": 0.1,
       "prompt": "{file:./prompts/reviewer.md}",
